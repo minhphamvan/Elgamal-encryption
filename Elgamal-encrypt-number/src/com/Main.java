@@ -9,10 +9,11 @@ package com;
  *
  * @author Minh Pham
  */
-public class _2_MainElgamalEncryptText {
+public class Main {
     
-    // Mã hóa, giải mã một đoạn bản rõ (tiếng Anh, tiếng Việt, số, kí tự đặc biệt,...)
+    // Mã hóa, giải mã 1 bản rõ
     public static void main(String[] args) {
-        new _2_ElgamalEncryptTextJFrame().setVisible(true);
+        new Elgamal_Encrypt_Number_JFrame().setVisible(true);
     }
+
 }

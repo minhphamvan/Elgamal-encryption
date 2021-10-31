@@ -5,21 +5,24 @@
  */
 package com;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Minh Pham
  */
-public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
+public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form ElgamalJFrame
      */
-    public _2_ElgamalEncryptTextJFrame() {
+    public Elgamal_Encrypt_Text_JFrame() {
         initComponents();
-        setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL");
+        setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL: Encrypt text");
         setLocationRelativeTo(null);
     }
 
@@ -236,9 +239,10 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
                     .addComponent(btnLamLai))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel9))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)))
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -511,6 +515,8 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
             txtE1SinhKhoa.setText(String.valueOf(e1));
             txtPSinhKhoa.setText(String.valueOf(p));
             txtDSinhKhoa.setText(String.valueOf(d));
+
+            checkboxSinhNgauNhien.setSelected(false);
         } else {
             if (txtP.getText().length() == 0 || txtE1.getText().length() == 0 || txtD.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ p, e1, d !!");
@@ -564,31 +570,39 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
         if (txtBanRo.getText().length() == 0 || txtR.getText().length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ bản rõ và r !!");
         } else {
-            String banRo = txtBanRo.getText();
+            try {
+                String banRo = txtBanRo.getText();
 
-            long e2 = Long.parseLong(txtE2.getText());
-            long e1 = Long.parseLong(txtE1.getText());
-            long p = Long.parseLong(txtP.getText());
-            long r = Long.parseLong(txtR.getText());
-            
-            // Mã hóa
-            String banMa = maHoa(banRo, e2, e1, p, r);
-            txtBanMa.setText(banMa);
+                long e2 = Long.parseLong(txtE2.getText());
+                long e1 = Long.parseLong(txtE1.getText());
+                long p = Long.parseLong(txtP.getText());
+                long r = Long.parseLong(txtR.getText());
 
-            // Gửi đến bên nhận
-            txtBanMaGiaiMa.setText(String.valueOf(banMa));
+                // Mã hóa
+                String banMa = maHoa(banRo, e2, e1, p, r);
+                txtBanMa.setText(banMa);
+
+                // Gửi đến bên nhận
+                txtBanMaGiaiMa.setText(String.valueOf(banMa));
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Elgamal_Encrypt_Text_JFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnMaHoaActionPerformed
 
     private void btnGiaiMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaiMaActionPerformed
-        String banMa = txtBanMaGiaiMa.getText();
+        try {
+            String banMa = txtBanMaGiaiMa.getText();
 
-        long d = Long.parseLong(txtDGiaiMa.getText());
-        long p = Long.parseLong(txtP.getText());
+            long d = Long.parseLong(txtDGiaiMa.getText());
+            long p = Long.parseLong(txtP.getText());
 
-        String banRo = giaiMa(banMa, p, d);
+            String banRo = giaiMa(banMa, p, d);
 
-        txtBanRoSauKhiGiaiMa.setText(banRo);
+            txtBanRoSauKhiGiaiMa.setText(banRo);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Elgamal_Encrypt_Text_JFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnGiaiMaActionPerformed
 
     private void resetAllInputSinhKhoa() {
@@ -601,6 +615,8 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
         txtE1SinhKhoa.setText("");
         txtPSinhKhoa.setText("");
         txtDSinhKhoa.setText("");
+
+        checkboxSinhNgauNhien.setSelected(false);
     }
 
     private void resetAllInputMaHoa() {
@@ -673,11 +689,11 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
         }
     }
 
-    public static String maHoa(String banRo, long e2, long e1, long p, long r) {
+    public static String maHoa(String banRo, long e2, long e1, long p, long r) throws UnsupportedEncodingException {
         String encryptTxt = "";
 
         // Chuyển đầu vào thành mã Unicode
-        String base64 = Base64.getEncoder().encodeToString(banRo.getBytes()); // ví dụ: a -> YQ==
+        String base64 = Base64.getEncoder().encodeToString(banRo.getBytes("UTF-8")); // ví dụ: a -> YQ==
 
         System.out.println("\n1. Bản rõ: " + banRo); // a
         System.out.println("2. Encode base 64 bản rõ: " + base64); // YQ==
@@ -711,17 +727,17 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
         System.out.println(encryptTxt);
 
         // Encode bản mã encryptTxt về dạng không đọc được
-        String result = Base64.getEncoder().encodeToString(encryptTxt.getBytes());
+        String result = Base64.getEncoder().encodeToString(encryptTxt.getBytes("UTF-8"));
         System.out.println("5. Encode base64 các cặp bản mã và gửi đi.\n" + result);
 
         return result;
     }
 
-    private String giaiMa(String banMa, long p, long d) {
+    private String giaiMa(String banMa, long p, long d) throws UnsupportedEncodingException {
         String decryptTxt = "";
 
         // Decode bản mã về dạng đợc được: c1-c2#c1-c2
-        String banMaDecoded = new String(Base64.getDecoder().decode(banMa));
+        String banMaDecoded = new String(Base64.getDecoder().decode(banMa), "UTF-8");
 
         // Chuỗi encryptTxt sẽ có dạng: c1-c2#c1-c2#c1-c2
         String[] arrBanMa = banMaDecoded.split("\n");
@@ -744,7 +760,7 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
         }
 
         // Decode về bản rõ nhập vào
-        String banRo = new String(Base64.getDecoder().decode(decryptTxt));
+        String banRo = new String(Base64.getDecoder().decode(decryptTxt), "UTF-8");
 
         return banRo;
     }
@@ -766,14 +782,18 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(_2_ElgamalEncryptTextJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elgamal_Encrypt_Text_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(_2_ElgamalEncryptTextJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elgamal_Encrypt_Text_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(_2_ElgamalEncryptTextJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elgamal_Encrypt_Text_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(_2_ElgamalEncryptTextJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elgamal_Encrypt_Text_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -782,7 +802,7 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new _2_ElgamalEncryptTextJFrame().setVisible(true);
+                new Elgamal_Encrypt_Text_JFrame().setVisible(true);
             }
         });
     }

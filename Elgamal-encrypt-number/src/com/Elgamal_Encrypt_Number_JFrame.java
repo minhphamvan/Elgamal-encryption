@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  *
  * @author Minh Pham
  */
-public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
+public class Elgamal_Encrypt_Number_JFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form ElgamalJFrame
      */
-    public _1_ElgamalEncryptJFrame() {
+    public Elgamal_Encrypt_Number_JFrame() {
         initComponents();
-        setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL");
+        setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL: Encrypt number");
         setLocationRelativeTo(null);
     }
 
@@ -315,29 +315,26 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGap(10, 10, 10))))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(txtBanRo, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtE2MaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtE1MaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPMaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80)
-                                .addComponent(jLabel13)
-                                .addGap(89, 89, 89)
-                                .addComponent(jLabel14))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtR, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(32, 32, 32)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(80, 80, 80)
+                            .addComponent(jLabel13)
+                            .addGap(89, 89, 89)
+                            .addComponent(jLabel14))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtBanRo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(txtE2MaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtE1MaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addComponent(txtPMaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtR, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(71, Short.MAX_VALUE)
@@ -437,9 +434,9 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
+                                .addGap(37, 37, 37)
                                 .addComponent(jLabel21)
-                                .addGap(100, 100, 100)
+                                .addGap(108, 108, 108)
                                 .addComponent(jLabel22))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -532,6 +529,8 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
             txtE1SinhKhoa.setText(String.valueOf(e1));
             txtPSinhKhoa.setText(String.valueOf(p));
             txtDSinhKhoa.setText(String.valueOf(d));
+            
+            checkboxSinhNgauNhien.setSelected(false);
         } else {
             if (txtP.getText().length() == 0 || txtE1.getText().length() == 0 || txtD.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ p, e1, d !!");
@@ -632,6 +631,8 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
         txtE1SinhKhoa.setText("");
         txtPSinhKhoa.setText("");
         txtDSinhKhoa.setText("");
+        
+        checkboxSinhNgauNhien.setSelected(false);
     }
 
     private void resetAllInputMaHoa() {
@@ -723,14 +724,18 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(_1_ElgamalEncryptJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elgamal_Encrypt_Number_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(_1_ElgamalEncryptJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elgamal_Encrypt_Number_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(_1_ElgamalEncryptJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elgamal_Encrypt_Number_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(_1_ElgamalEncryptJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elgamal_Encrypt_Number_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -739,7 +744,7 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new _1_ElgamalEncryptJFrame().setVisible(true);
+                new Elgamal_Encrypt_Number_JFrame().setVisible(true);
             }
         });
     }
