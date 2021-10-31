@@ -1,0 +1,12 @@
+- Mã hóa:
+	1. Bản rõ: abc
+	2. Encode base 64 bản rõ: YWJj
+	3. Chuyển bản rõ sau khi decode thành dạng số hệ Decimal: YWJj -> 89 81 61 61
+	4. Chọn khóa bí mật r=5, Lần lượt tính các cặp bản mã c1-c2:
+		75161-493354
+		75161-498176
+		75161-529519
+		75161-452367
+	5. Lưu vào chuỗi, sau đó encode base64 các cặp bản mã và gửi đi: 								NzUxNjEtNDkzMzU0Cjc1MTYxLTQ5ODE3Ngo3NTE2MS01Mjk1MTkKNzUxNjEtNDUyMzY3
+
+- Giải mã: làm ngược lại mã hóa.

@@ -5,6 +5,7 @@
  */
 package com;
 
+import java.util.Base64;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +17,6 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
     /**
      * Creates new form ElgamalJFrame
      */
-    long p, e1, d, e2;
-
     public _2_ElgamalEncryptTextJFrame() {
         initComponents();
         setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL");
@@ -497,11 +496,11 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
         resetAllInputGiaiMa();
 
         if (checkboxSinhNgauNhien.isSelected()) {
-            p = 707933;
-            e1 = 203;
-            d = 765;
+            long p = 707933;
+            long e1 = 203;
+            long d = 765;
 
-            e2 = moduloMu(e1, d, p); // e2 = e1^d mod p
+            long e2 = moduloMu(e1, d, p); // e2 = e1^d mod p
 
             txtP.setText(String.valueOf(p));
             txtD.setText(String.valueOf(d));
@@ -516,9 +515,9 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
             if (txtP.getText().length() == 0 || txtE1.getText().length() == 0 || txtD.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ p, e1, d !!");
             } else {
-                p = Long.parseLong(txtP.getText());
-                e1 = Long.parseLong(txtE1.getText());
-                d = Long.parseLong(txtD.getText());
+                long p = Long.parseLong(txtP.getText());
+                long e1 = Long.parseLong(txtE1.getText());
+                long d = Long.parseLong(txtD.getText());
 
                 if (kiemTraNguyenTo(p) == false) {
                     JOptionPane.showMessageDialog(rootPane, "Hãy chọn p là số nguyên tố !!");
@@ -527,7 +526,7 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Chọn d trong khoảng 1 < d < p-1.");
                     txtD.setText("");
                 } else {
-                    e2 = moduloMu(e1, d, p); // e2 = e1^d mod p
+                    long e2 = moduloMu(e1, d, p); // e2 = e1^d mod p
 
                     txtE2.setText(String.valueOf(e2));
 
@@ -548,11 +547,16 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
 
     private void btnCongKhaiKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCongKhaiKhoaActionPerformed
         // Công khai khóa e2, e1, p lên internet
+        long e2 = Long.parseLong(txtE2.getText());
+        long e1 = Long.parseLong(txtE1.getText());
+        long p = Long.parseLong(txtP.getText());
+
         txtE2MaHoa.setText(String.valueOf(e2));
         txtE1MaHoa.setText(String.valueOf(e1));
         txtPMaHoa.setText(String.valueOf(p));
 
         // Khóa bí mật d
+        long d = Long.parseLong(txtD.getText());
         txtDGiaiMa.setText(String.valueOf(d));
     }//GEN-LAST:event_btnCongKhaiKhoaActionPerformed
 
@@ -560,36 +564,31 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
         if (txtBanRo.getText().length() == 0 || txtR.getText().length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ bản rõ và r !!");
         } else {
-            long banRo = Long.parseLong(txtBanRo.getText());
+            String banRo = txtBanRo.getText();
+
+            long e2 = Long.parseLong(txtE2.getText());
+            long e1 = Long.parseLong(txtE1.getText());
+            long p = Long.parseLong(txtP.getText());
             long r = Long.parseLong(txtR.getText());
+            
+            // Mã hóa
+            String banMa = maHoa(banRo, e2, e1, p, r);
+            txtBanMa.setText(banMa);
 
-            long c1 = moduloMu(e1, r, p);
-
-            // c2 = (c1^d * m) mod p = [(c1^d MOD p) * (m mod p)] mod p
-            long temp1 = moduloMu(c1, d, p);
-            long temp2 = moduloMu(banRo, 1, p);
-            long c2 = moduloMu(temp1 * temp2, 1, p);
-
-//            txtC1.setText(String.valueOf(c1));
-//            txtC2.setText(String.valueOf(c2));
             // Gửi đến bên nhận
-//            txtC1GiaiMa.setText(String.valueOf(c1));
-//            txtC2GiaiMa.setText(String.valueOf(c2));
+            txtBanMaGiaiMa.setText(String.valueOf(banMa));
         }
     }//GEN-LAST:event_btnMaHoaActionPerformed
 
     private void btnGiaiMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaiMaActionPerformed
-//        long c1 = Long.parseLong(txtC1GiaiMa.getText());
-//        long c2 = Long.parseLong(txtC2.getText());
+        String banMa = txtBanMaGiaiMa.getText();
 
         long d = Long.parseLong(txtDGiaiMa.getText());
         long p = Long.parseLong(txtP.getText());
 
-//        long z = moduloMu(c1, d, p);
-//        long nghichDaoZ = moduloNghichDao(z, p);
-//
-//        long banRo = moduloMu(c2 * nghichDaoZ, 1, p);
+        String banRo = giaiMa(banMa, p, d);
 
+        txtBanRoSauKhiGiaiMa.setText(banRo);
     }//GEN-LAST:event_btnGiaiMaActionPerformed
 
     private void resetAllInputSinhKhoa() {
@@ -672,6 +671,82 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
             y = kd + y;
             return y;
         }
+    }
+
+    public static String maHoa(String banRo, long e2, long e1, long p, long r) {
+        String encryptTxt = "";
+
+        // Chuyển đầu vào thành mã Unicode
+        String base64 = Base64.getEncoder().encodeToString(banRo.getBytes()); // ví dụ: a -> YQ==
+
+        System.out.println("\n1. Bản rõ: " + banRo); // a
+        System.out.println("2. Encode base 64 bản rõ: " + base64); // YQ==
+        System.out.println("3. Chuyển bản rõ sau khi decode thành dạng số hệ Decimal.");
+
+        // Chuyển xâu Unicode thành dạng số hệ Decimal: YQ== --> 89 81 61 61
+        int[] base64Decimal = new int[base64.length()];
+        for (int i = 0; i < base64Decimal.length; i++) {
+            base64Decimal[i] = (int) (base64.charAt(i));
+        }
+
+        // Mã hóa lần lượt mảng base64Decimal tương tự như với mã hóa từng số
+        // Chuỗi encryptTxt sẽ có dạng: c1-c2#c1-c2#c1-c2
+        System.out.println("4. Lần lượt tính các cặp bản mã c1-c2:");
+        long c1 = moduloMu(e1, r, p);
+
+        for (int i = 0; i < base64Decimal.length; i++) {
+            // c2 = (e2^r * m) mod p = [(e2^r MOD p) * (m^1 mod p)] mod p
+            long temp1 = moduloMu(e2, r, p);
+            long temp2 = moduloMu(base64Decimal[i], 1, p);
+            long c2 = moduloMu(temp1 * temp2, 1, p);
+
+            encryptTxt += c1 + "-";
+
+            encryptTxt += c2;
+            if (i != base64Decimal.length - 1) {
+                encryptTxt += "\n";
+            }
+        }
+
+        System.out.println(encryptTxt);
+
+        // Encode bản mã encryptTxt về dạng không đọc được
+        String result = Base64.getEncoder().encodeToString(encryptTxt.getBytes());
+        System.out.println("5. Encode base64 các cặp bản mã và gửi đi.\n" + result);
+
+        return result;
+    }
+
+    private String giaiMa(String banMa, long p, long d) {
+        String decryptTxt = "";
+
+        // Decode bản mã về dạng đợc được: c1-c2#c1-c2
+        String banMaDecoded = new String(Base64.getDecoder().decode(banMa));
+
+        // Chuỗi encryptTxt sẽ có dạng: c1-c2#c1-c2#c1-c2
+        String[] arrBanMa = banMaDecoded.split("\n");
+
+        for (int i = 0; i < arrBanMa.length; i++) {
+            int index = arrBanMa[i].indexOf('-');
+
+            String c1Str = arrBanMa[i].substring(0, index);
+            String c2Str = arrBanMa[i].substring(index + 1);
+
+            long c1 = Long.valueOf(c1Str);
+            long c2 = Long.valueOf(c2Str);
+
+            // Tìm message M
+            long z = moduloMu(c1, d, p);
+            long nghichDaoZ = moduloNghichDao(z, p);
+            long M = moduloMu(c2 * nghichDaoZ, 1, p);
+
+            decryptTxt += (char) M;
+        }
+
+        // Decode về bản rõ nhập vào
+        String banRo = new String(Base64.getDecoder().decode(decryptTxt));
+
+        return banRo;
     }
 
     /**
@@ -766,4 +841,5 @@ public class _2_ElgamalEncryptTextJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtPSinhKhoa;
     private javax.swing.JTextField txtR;
     // End of variables declaration//GEN-END:variables
+
 }

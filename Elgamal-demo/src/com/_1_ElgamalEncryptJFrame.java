@@ -16,8 +16,6 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
     /**
      * Creates new form ElgamalJFrame
      */
-    long p, e1, d, e2;
-
     public _1_ElgamalEncryptJFrame() {
         initComponents();
         setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL");
@@ -69,6 +67,7 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtDSinhKhoa = new javax.swing.JTextField();
         btnCongKhaiKhoa = new javax.swing.JButton();
+        checkboxSinhNgauNhien = new javax.swing.JCheckBox();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -158,6 +157,8 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
             }
         });
 
+        checkboxSinhNgauNhien.setText("Sinh ngẫu nhiên");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,56 +166,53 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addGap(50, 50, 50))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(txtDSinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                                .addComponent(txtE2SinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtE2SinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtE1SinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(txtPSinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDSinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(80, 80, 80)
-                                        .addComponent(jLabel8))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtP)
-                                            .addComponent(txtE1)
-                                            .addComponent(txtD)
-                                            .addComponent(txtE2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))))
+                                    .addComponent(checkboxSinhNgauNhien)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtP)
+                                        .addComponent(txtE1)
+                                        .addComponent(txtD)
+                                        .addComponent(txtE2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
+                                .addGap(73, 73, 73)
                                 .addComponent(btnLamLai, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
+                                .addGap(67, 67, 67)
                                 .addComponent(tbnTaoKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(62, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(49, 49, 49))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCongKhaiKhoa)
-                .addGap(125, 125, 125))
+                .addGap(127, 127, 127))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,28 +233,34 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtE2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLamLai)
-                    .addComponent(tbnTaoKhoa))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(3, 3, 3)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtE2SinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtE1SinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPSinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDSinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnCongKhaiKhoa)
-                .addGap(34, 34, 34))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(checkboxSinhNgauNhien)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtE2SinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtE1SinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPSinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDSinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCongKhaiKhoa))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tbnTaoKhoa)
+                            .addComponent(btnLamLai))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel8))))
+                .addGap(25, 25, 25))
         );
 
         jTabbedPane1.addTab("Sinh khóa", jPanel1);
@@ -512,28 +516,46 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
         resetAllInputMaHoa();
         resetAllInputGiaiMa();
 
-        if (txtP.getText().length() == 0 || txtE1.getText().length() == 0 || txtD.getText().length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ p, e1, d !!");
+        if (checkboxSinhNgauNhien.isSelected()) {
+            long p = 707933;
+            long e1 = 203;
+            long d = 765;
+
+            long e2 = moduloMu(e1, d, p); // e2 = e1^d mod p
+
+            txtP.setText(String.valueOf(p));
+            txtD.setText(String.valueOf(d));
+            txtE1.setText(String.valueOf(e1));
+            txtE2.setText(String.valueOf(e2));
+
+            txtE2SinhKhoa.setText(String.valueOf(e2));
+            txtE1SinhKhoa.setText(String.valueOf(e1));
+            txtPSinhKhoa.setText(String.valueOf(p));
+            txtDSinhKhoa.setText(String.valueOf(d));
         } else {
-            p = Long.parseLong(txtP.getText());
-            e1 = Long.parseLong(txtE1.getText());
-            d = Long.parseLong(txtD.getText());
-
-            if (kiemTraNguyenTo(p) == false) {
-                JOptionPane.showMessageDialog(rootPane, "Hãy chọn p là số nguyên tố !!");
-                resetAllInputSinhKhoa();
-            } else if (d <= 1 || d >= p - 1) {
-                JOptionPane.showMessageDialog(rootPane, "Chọn d trong khoảng 1 < d < p-1.");
-                txtD.setText("");
+            if (txtP.getText().length() == 0 || txtE1.getText().length() == 0 || txtD.getText().length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ p, e1, d !!");
             } else {
-                e2 = moduloMu(e1, d, p); // e2 = e1^d mod p
+                long p = Long.parseLong(txtP.getText());
+                long e1 = Long.parseLong(txtE1.getText());
+                long d = Long.parseLong(txtD.getText());
 
-                txtE2.setText(String.valueOf(e2));
+                if (kiemTraNguyenTo(p) == false) {
+                    JOptionPane.showMessageDialog(rootPane, "Hãy chọn p là số nguyên tố !!");
+                    resetAllInputSinhKhoa();
+                } else if (d <= 1 || d >= p - 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Chọn d trong khoảng 1 < d < p-1.");
+                    txtD.setText("");
+                } else {
+                    long e2 = moduloMu(e1, d, p); // e2 = e1^d mod p
 
-                txtE2SinhKhoa.setText(String.valueOf(e2));
-                txtE1SinhKhoa.setText(String.valueOf(e1));
-                txtPSinhKhoa.setText(String.valueOf(p));
-                txtDSinhKhoa.setText(String.valueOf(d));
+                    txtE2.setText(String.valueOf(e2));
+
+                    txtE2SinhKhoa.setText(String.valueOf(e2));
+                    txtE1SinhKhoa.setText(String.valueOf(e1));
+                    txtPSinhKhoa.setText(String.valueOf(p));
+                    txtDSinhKhoa.setText(String.valueOf(d));
+                }
             }
         }
     }//GEN-LAST:event_tbnTaoKhoaActionPerformed
@@ -546,11 +568,16 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
 
     private void btnCongKhaiKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCongKhaiKhoaActionPerformed
         // Công khai khóa e2, e1, p lên internet
+        long e2 = Long.parseLong(txtE2.getText());
+        long e1 = Long.parseLong(txtE1.getText());
+        long p = Long.parseLong(txtP.getText());
+
         txtE2MaHoa.setText(String.valueOf(e2));
         txtE1MaHoa.setText(String.valueOf(e1));
         txtPMaHoa.setText(String.valueOf(p));
 
         // Khóa bí mật d
+        long d = Long.parseLong(txtD.getText());
         txtDGiaiMa.setText(String.valueOf(d));
     }//GEN-LAST:event_btnCongKhaiKhoaActionPerformed
 
@@ -559,12 +586,15 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ bản rõ và r !!");
         } else {
             long banRo = Long.parseLong(txtBanRo.getText());
+            long e2 = Long.parseLong(txtE2.getText());
+            long e1 = Long.parseLong(txtE1.getText());
+            long p = Long.parseLong(txtP.getText());
             long r = Long.parseLong(txtR.getText());
 
             long c1 = moduloMu(e1, r, p);
 
-            // c2 = (c1^d * m) mod p = [(c1^d MOD p) * (m mod p)] mod p
-            long temp1 = moduloMu(c1, d, p);
+            // c2 = (e2^r * m) mod p = [(e2^r MOD p) * (m mod p)] mod p
+            long temp1 = moduloMu(e2, r, p);
             long temp2 = moduloMu(banRo, 1, p);
             long c2 = moduloMu(temp1 * temp2, 1, p);
 
@@ -588,7 +618,7 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
         long nghichDaoZ = moduloNghichDao(z, p);
 
         long banRo = moduloMu(c2 * nghichDaoZ, 1, p);
-        
+
         txtBanRoKhiGiaiMa.setText(String.valueOf(banRo));
     }//GEN-LAST:event_btnGiaiMaActionPerformed
 
@@ -719,6 +749,7 @@ public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnGiaiMa;
     private javax.swing.JButton btnLamLai;
     private javax.swing.JButton btnMaHoa;
+    private javax.swing.JCheckBox checkboxSinhNgauNhien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
