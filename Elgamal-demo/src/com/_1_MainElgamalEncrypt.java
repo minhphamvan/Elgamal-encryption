@@ -9,10 +9,10 @@ package com;
  *
  * @author Minh Pham
  */
-public class Main {
+public class _1_MainElgamalEncrypt {
 
     public static void main(String[] args) {
-        new ElgamalJFrame().setVisible(true);
+        new _1_ElgamalEncryptJFrame().setVisible(true);
     }
 
 }

@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  *
  * @author Minh Pham
  */
-public class ElgamalJFrame extends javax.swing.JFrame {
+public class _1_ElgamalEncryptJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form ElgamalJFrame
      */
     long p, e1, d, e2;
 
-    public ElgamalJFrame() {
+    public _1_ElgamalEncryptJFrame() {
         initComponents();
         setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL");
         setLocationRelativeTo(null);
@@ -526,7 +526,7 @@ public class ElgamalJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Chọn d trong khoảng 1 < d < p-1.");
                 txtD.setText("");
             } else {
-                e2 = solve(e1, d, p); // e2 = e1^d mod p
+                e2 = moduloMu(e1, d, p); // e2 = e1^d mod p
 
                 txtE2.setText(String.valueOf(e2));
 
@@ -561,12 +561,12 @@ public class ElgamalJFrame extends javax.swing.JFrame {
             long banRo = Long.parseLong(txtBanRo.getText());
             long r = Long.parseLong(txtR.getText());
 
-            long c1 = solve(e1, r, p);
+            long c1 = moduloMu(e1, r, p);
 
             // c2 = (c1^d * m) mod p = [(c1^d MOD p) * (m mod p)] mod p
-            long temp1 = solve(c1, d, p);
-            long temp2 = solve(banRo, 1, p);
-            long c2 = solve(temp1 * temp2, 1, p);
+            long temp1 = moduloMu(c1, d, p);
+            long temp2 = moduloMu(banRo, 1, p);
+            long c2 = moduloMu(temp1 * temp2, 1, p);
 
             txtC1.setText(String.valueOf(c1));
             txtC2.setText(String.valueOf(c2));
@@ -578,8 +578,18 @@ public class ElgamalJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMaHoaActionPerformed
 
     private void btnGiaiMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaiMaActionPerformed
+        long c1 = Long.parseLong(txtC1GiaiMa.getText());
+        long c2 = Long.parseLong(txtC2.getText());
 
+        long d = Long.parseLong(txtDGiaiMa.getText());
+        long p = Long.parseLong(txtP.getText());
 
+        long z = moduloMu(c1, d, p);
+        long nghichDaoZ = moduloNghichDao(z, p);
+
+        long banRo = moduloMu(c2 * nghichDaoZ, 1, p);
+        
+        txtBanRoKhiGiaiMa.setText(String.valueOf(banRo));
     }//GEN-LAST:event_btnGiaiMaActionPerformed
 
     private void resetAllInputSinhKhoa() {
@@ -611,10 +621,11 @@ public class ElgamalJFrame extends javax.swing.JFrame {
         txtC2GiaiMa.setText("");
 
         txtDGiaiMa.setText("");
+        txtBanRoKhiGiaiMa.setText("");
     }
 
     // Tính a^n mod p: sử dụng thuật toán "bình phương nhân"
-    private static long solve(long a, long n, long p) {
+    private static long moduloMu(long a, long n, long p) {
         //Chuyển n sang hệ nhị phân
         long[] arr = new long[100];
         int k = 0;
@@ -637,6 +648,34 @@ public class ElgamalJFrame extends javax.swing.JFrame {
         return answer;
     }
 
+    // Tính nghịch đảo modulo: x^-1 mod p
+    private static long moduloNghichDao(long x, long soModulo) {
+        long kd = soModulo;
+        long r = 1, q, y0 = 0, y1 = 1, y = 0;
+
+        while (x != 0) {
+            r = soModulo % x;
+
+            if (r == 0) {
+                break;
+            } else {
+                q = soModulo / x;
+                y = y0 - y1 * q;
+                soModulo = x;
+                x = r;
+                y0 = y1;
+                y1 = y;
+            }
+        }
+
+        if (y >= 0) {
+            return y;
+        } else {
+            y = kd + y;
+            return y;
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -654,20 +693,23 @@ public class ElgamalJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ElgamalJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(_1_ElgamalEncryptJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ElgamalJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(_1_ElgamalEncryptJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ElgamalJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(_1_ElgamalEncryptJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ElgamalJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(_1_ElgamalEncryptJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ElgamalJFrame().setVisible(true);
+                new _1_ElgamalEncryptJFrame().setVisible(true);
             }
         });
     }
