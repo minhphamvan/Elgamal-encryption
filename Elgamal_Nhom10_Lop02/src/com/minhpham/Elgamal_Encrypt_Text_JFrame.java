@@ -22,7 +22,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
 
     public Elgamal_Encrypt_Text_JFrame() {
         initComponents();
-        setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL: Encrypt text");
+        setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL - NHÓM 10");
         setLocationRelativeTo(null);
 
         this.chiTietQuaTrinh = "";
@@ -673,7 +673,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         this.chiTietQuaTrinh = "";
     }
 
-    // Tính a^n mod p: sử dụng thuật toán "bình phương nhân"
+    // Tính a^n mod p
     private static long moduloMu(long a, long n, long p) {
         //Chuyển n sang hệ nhị phân
         long[] arr = new long[100];
@@ -685,7 +685,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
             n = n / 2;
         } while (n != 0);
 
-        //Quá trình lấy dư
+        // Quá trình lấy dư
         long answer = 1;
         for (int i = k - 1; i >= 0; i--) {
             answer = (answer * answer) % p;
