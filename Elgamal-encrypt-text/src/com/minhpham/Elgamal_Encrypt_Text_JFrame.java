@@ -1,10 +1,16 @@
 package com.minhpham;
 
+import java.awt.Dimension;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
 
 /**
  *
@@ -12,10 +18,14 @@ import javax.swing.JOptionPane;
  */
 public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
 
+    private String chiTietQuaTrinh;
+
     public Elgamal_Encrypt_Text_JFrame() {
         initComponents();
         setTitle("GIẢI THUẬT MÃ HÓA ELGAMAL: Encrypt text");
         setLocationRelativeTo(null);
+
+        this.chiTietQuaTrinh = "";
     }
 
     private boolean kiemTraNguyenTo(long n) {
@@ -88,6 +98,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         txtBanMaGiaiMa = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtBanRoSauKhiGiaiMa = new javax.swing.JTextArea();
+        btnXemChiTietQuaTrinh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,7 +125,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         jLabel7.setText("<html>=> e2 = e1<sup>d</sup> mod p</html>");
 
         tbnTaoKhoa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        tbnTaoKhoa.setText("Tạo khóa");
+        tbnTaoKhoa.setText("1. Tạo khóa");
         tbnTaoKhoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbnTaoKhoaActionPerformed(evt);
@@ -139,7 +150,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         jLabel9.setText("p");
 
         btnCongKhaiKhoa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnCongKhaiKhoa.setText("Công khai khóa");
+        btnCongKhaiKhoa.setText("2. Công khai khóa");
         btnCongKhaiKhoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCongKhaiKhoaActionPerformed(evt);
@@ -170,19 +181,9 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
                         .addComponent(txtE1SinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtPSinhKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(147, 147, 147)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(62, 62, 62)
-                            .addComponent(jLabel8)
-                            .addGap(79, 79, 79)
-                            .addComponent(jLabel9))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(57, 57, 57)
-                            .addComponent(btnLamLai, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tbnTaoKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(btnLamLai, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,7 +197,16 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
                                 .addComponent(txtD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                 .addComponent(txtE1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtP, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtE2)))))
+                                .addComponent(txtE2))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(tbnTaoKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(147, 147, 147)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62)
+                            .addComponent(jLabel8)
+                            .addGap(79, 79, 79)
+                            .addComponent(jLabel9))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -273,7 +283,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         jLabel16.setText("Khóa bí mật r:");
 
         btnMaHoa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnMaHoa.setText("Mã hóa");
+        btnMaHoa.setText("3. Mã hóa");
         btnMaHoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMaHoaActionPerformed(evt);
@@ -335,8 +345,8 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnMaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(141, 141, 141))
+                .addComponent(btnMaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,7 +397,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         jLabel10.setText("Khóa bí mật d:");
 
         btnGiaiMa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnGiaiMa.setText("Giải mã");
+        btnGiaiMa.setText("4. Giải mã");
         btnGiaiMa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGiaiMaActionPerformed(evt);
@@ -423,8 +433,8 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGiaiMa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127))
+                .addComponent(btnGiaiMa)
+                .addGap(123, 123, 123))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,6 +464,14 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Giải mã", jPanel3);
 
+        btnXemChiTietQuaTrinh.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnXemChiTietQuaTrinh.setText("Xem chi tiết quá trình mã hóa / giải mã");
+        btnXemChiTietQuaTrinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemChiTietQuaTrinhActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -466,6 +484,10 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXemChiTietQuaTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(304, 304, 304))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,7 +497,9 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
                     .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnXemChiTietQuaTrinh, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -484,6 +508,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
     private void tbnTaoKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnTaoKhoaActionPerformed
         resetAllInputMaHoa();
         resetAllInputGiaiMa();
+        resetQuaTrinhMaHoaGiaiMa();
 
         if (checkboxSinhNgauNhien.isSelected()) {
             long p = 707933;
@@ -502,7 +527,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
             txtPSinhKhoa.setText(String.valueOf(p));
             txtDSinhKhoa.setText(String.valueOf(d));
 
-            checkboxSinhNgauNhien.setSelected(false);
+            checkboxSinhNgauNhien.setSelected(true);
         } else {
             if (txtP.getText().length() == 0 || txtE1.getText().length() == 0 || txtD.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ p, e1, d !!");
@@ -535,9 +560,12 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         resetAllInputSinhKhoa();
         resetAllInputMaHoa();
         resetAllInputGiaiMa();
+        resetQuaTrinhMaHoaGiaiMa();
     }//GEN-LAST:event_btnLamLaiActionPerformed
 
     private void btnCongKhaiKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCongKhaiKhoaActionPerformed
+        resetQuaTrinhMaHoaGiaiMa();
+
         // Công khai khóa e2, e1, p lên internet
         long e2 = Long.parseLong(txtE2.getText());
         long e1 = Long.parseLong(txtE1.getText());
@@ -557,6 +585,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập đầy đủ bản rõ và r !!");
         } else {
             try {
+                resetQuaTrinhMaHoaGiaiMa();
                 String banRo = txtBanRo.getText();
 
                 long e2 = Long.parseLong(txtE2.getText());
@@ -591,6 +620,22 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGiaiMaActionPerformed
 
+    private void btnXemChiTietQuaTrinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietQuaTrinhActionPerformed
+        try {
+            JTextPane jtp = new JTextPane();
+            Document doc = jtp.getDocument();
+            doc.insertString(doc.getLength(), chiTietQuaTrinh, new SimpleAttributeSet());
+
+            JScrollPane jsp = new JScrollPane(jtp);
+            jsp.setPreferredSize(new Dimension(650, 350));
+            jsp.setBorder(null);
+
+            JOptionPane.showMessageDialog(null, jsp, "Chi tiết quá trình mã hóa/giải mã", JOptionPane.INFORMATION_MESSAGE);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(Elgamal_Encrypt_Text_JFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnXemChiTietQuaTrinhActionPerformed
+
     private void resetAllInputSinhKhoa() {
         txtP.setText("");
         txtE1.setText("");
@@ -603,6 +648,7 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         txtDSinhKhoa.setText("");
 
         checkboxSinhNgauNhien.setSelected(false);
+        resetQuaTrinhMaHoaGiaiMa();
     }
 
     private void resetAllInputMaHoa() {
@@ -621,6 +667,10 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
 
         txtDGiaiMa.setText("");
         txtBanRoSauKhiGiaiMa.setText("");
+    }
+
+    private void resetQuaTrinhMaHoaGiaiMa() {
+        this.chiTietQuaTrinh = "";
     }
 
     // Tính a^n mod p: sử dụng thuật toán "bình phương nhân"
@@ -675,25 +725,28 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         }
     }
 
-    public static String maHoa(String banRo, long e2, long e1, long p, long r) throws UnsupportedEncodingException {
+    public String maHoa(String banRo, long e2, long e1, long p, long r) throws UnsupportedEncodingException {
         String encryptTxt = "";
 
         // Chuyển đầu vào thành mã Unicode
         String base64 = Base64.getEncoder().encodeToString(banRo.getBytes("UTF-8")); // ví dụ: a -> YQ==
 
-        System.out.println("\n1. Bản rõ: " + banRo); // a
-        System.out.println("2. Encode base 64 bản rõ: " + base64); // YQ==
-        System.out.println("3. Chuyển bản rõ sau khi decode thành dạng số hệ Decimal.");
+        this.chiTietQuaTrinh += "-------------------------------- MÃ HÓA --------------------------------";
+        this.chiTietQuaTrinh += "\nBản rõ: " + banRo; // a
+        this.chiTietQuaTrinh += "\n1. Encode Base64 bản rõ: " + base64; // YQ==
+        this.chiTietQuaTrinh += "\n2. Chuyển các kí tự trong bản rõ sau khi decode Base64 thành dạng số hệ Decimal:\n"; // YQ== --> 89 81 61 61
 
         // Chuyển xâu Unicode thành dạng số hệ Decimal trong bảng ASCII: YQ== --> 89 81 61 61
         int[] base64Decimal = new int[base64.length()];
         for (int i = 0; i < base64Decimal.length; i++) {
             base64Decimal[i] = (int) (base64.charAt(i));
+
+            this.chiTietQuaTrinh += base64Decimal[i] + " ";
         }
 
         // Mã hóa lần lượt mảng base64Decimal tương tự như với mã hóa từng số
         // Chuỗi encryptTxt sẽ có dạng: c1-c2#c1-c2#c1-c2
-        System.out.println("4. Lần lượt tính các cặp bản mã c1-c2:");
+        this.chiTietQuaTrinh += "\n3. Lần lượt mã hóa từng số ở bước 2 ta được các cặp bản mã c1-c2:\n";
         long c1 = moduloMu(e1, r, p);
 
         for (int i = 0; i < base64Decimal.length; i++) {
@@ -710,11 +763,13 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
             }
         }
 
-        System.out.println(encryptTxt);
+        this.chiTietQuaTrinh += encryptTxt;
+        this.chiTietQuaTrinh += "\n4. Ghép các cặp bản mã c1-c2 ta được chuỗi các bản mã có dạng: c1-c2#c1-c2#c1-c2...";
 
         // Encode bản mã encryptTxt về dạng không đọc được
         String result = Base64.getEncoder().encodeToString(encryptTxt.getBytes("UTF-8"));
-        System.out.println("5. Encode base64 các cặp bản mã và gửi đi.\n" + result);
+        this.chiTietQuaTrinh += "\nSau đó encode Base64 chuỗi các cặp bản mã:\n" + result;
+        this.chiTietQuaTrinh += "\n5. Gửi đi";
 
         return result;
     }
@@ -723,6 +778,11 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         String decryptTxt = "";
 
         // Decode bản mã về dạng đợc được: c1-c2#c1-c2
+        this.chiTietQuaTrinh += "\n\n-------------------------------- GIẢI MÃ --------------------------------";
+        this.chiTietQuaTrinh += "\n1. Decode Base64 bản mã đã nhận được. Chuỗi sau khi decode sẽ có dạng: c1-c2#c1-c2#c1-c2...";
+        this.chiTietQuaTrinh += "\n2. Từ các cặp bản mã c1-c2 (dạng số decimal) lần lượt tính được một bản rõ m (dạng số decimal).";
+        this.chiTietQuaTrinh += "\n3. Chuyển lần lượt bản rõ m (dạng số decimal) sang dạng char và ghép các kí tự với nhau.";
+        this.chiTietQuaTrinh += "\n4. Decode Base64 mảng các kí tự ở bước 3, ta có được bản rõ.\n";
         String banMaDecoded = new String(Base64.getDecoder().decode(banMa), "UTF-8");
 
         // Chuỗi encryptTxt sẽ có dạng: c1-c2#c1-c2#c1-c2
@@ -751,19 +811,12 @@ public class Elgamal_Encrypt_Text_JFrame extends javax.swing.JFrame {
         return banRo;
     }
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Elgamal_Encrypt_Text_JFrame().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCongKhaiKhoa;
     private javax.swing.JButton btnGiaiMa;
     private javax.swing.JButton btnLamLai;
     private javax.swing.JButton btnMaHoa;
+    private javax.swing.JButton btnXemChiTietQuaTrinh;
     private javax.swing.JCheckBox checkboxSinhNgauNhien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
